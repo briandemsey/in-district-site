@@ -3,18 +3,355 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>in-district.org</title>
+<title>In-District: a new school board association, shaped with you</title>
+<meta name="description" content="In-District is a new school board association being shaped with California superintendents and business officials. Tell us what you would use.">
 <style>
-  html,body{height:100%;margin:0}
-  body{display:flex;align-items:center;justify-content:center;background:#fff;color:#1f3864;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:center;padding:16px;box-sizing:border-box}
-  h1{font-size:clamp(2rem,6vw,3.5rem);margin:0 0 .5rem;letter-spacing:-.02em}
-  p{font-size:1.15rem;color:#555;margin:0}
+:root{
+  --navy:#013967;
+  --navy-dark:#012a4d;
+  --green:#208577;
+  --ink:#10233a;
+  --muted:#5b6577;
+  --line:#e6eaf0;
+  --soft:#f5f8fb;
+  --white:#ffffff;
+  --radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{width:min(1100px,100% - 32px);margin-inline:auto}
+section{scroll-margin-top:96px}
+
+/* top bar */
+.nav{position:sticky;top:12px;z-index:50;width:min(1000px,100% - 24px);margin:12px auto 0;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:999px;box-shadow:0 8px 30px rgba(16,35,58,.06);display:flex;align-items:center;justify-content:space-between;padding:10px 14px 10px 20px}
+.nav img{height:34px;width:auto}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.nav ul a{text-decoration:none;font-size:.95rem;color:var(--muted)}
+.nav ul a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;background:var(--navy);color:#fff;font:inherit;font-weight:600;font-size:.97rem;padding:12px 22px;border-radius:999px;text-decoration:none;transition:background .15s,transform .15s}
+.btn:hover{background:var(--navy-dark);transform:translateY(-1px)}
+.btn.small{padding:9px 18px;font-size:.92rem}
+.btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+.btn.ghost:hover{background:var(--soft)}
+
+/* hero */
+.hero{text-align:center;padding:76px 0 40px}
+h1{font-size:clamp(2.3rem,6.2vw,4.3rem);line-height:1.04;letter-spacing:-.03em;margin:0;font-weight:700}
+h1 .light{display:block;color:#5a6b85;font-weight:600}
+.aside{position:relative;display:inline-block}
+.hand{display:block;margin-top:14px;font-family:"Segoe Script","Bradley Hand","Comic Sans MS",cursive;font-weight:400;letter-spacing:0;font-size:1.15rem;color:var(--green);transform:rotate(-2deg)}
+.sub{font-size:clamp(1.05rem,2.2vw,1.3rem);color:var(--muted);max-width:640px;margin:26px auto 0}
+.signup{display:flex;gap:10px;align-items:center;max-width:540px;margin:34px auto 0;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 7px 7px 22px;box-shadow:0 10px 36px rgba(16,35,58,.08)}
+.signup input{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:1rem;color:var(--ink);background:transparent}
+.signup input::placeholder{color:#8a95a8}
+.signup:focus-within{border-color:var(--navy);box-shadow:0 0 0 4px rgba(1,57,103,.1)}
+.fine{font-size:.88rem;color:var(--muted);margin:14px auto 0;max-width:520px}
+.msg{display:none;max-width:540px;margin:14px auto 0;padding:12px 16px;border-radius:14px;background:#e9f5f2;border:1px solid #bfe0d8;color:#154f45;font-size:.95rem;text-align:left}
+.msg.show{display:block}
+
+.for{text-align:center;font-size:1.15rem;color:var(--muted);margin:46px 0 0;min-height:1.8em}
+.for strong{color:var(--ink);font-weight:600}
+#rot{display:inline-block;transition:opacity .35s}
+#rot.fade{opacity:0}
+
+/* showcase card under hero */
+.showcase{margin:54px auto 0;border:1px solid var(--line);border-radius:30px;background:var(--soft);padding:clamp(18px,4vw,36px);box-shadow:0 14px 50px rgba(16,35,58,.06)}
+.show-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+.mini .tag{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--green);font-weight:700}
+.mini h3{margin:8px 0 6px;font-size:1.12rem}
+.mini p{margin:0;color:var(--muted);font-size:.95rem}
+.show-title{text-align:center;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;letter-spacing:-.02em;margin:0 0 22px}
+
+/* proof story */
+.story{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:96px 0 40px}
+.label{display:inline-block;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--muted);background:#fff;font-weight:600}
+h2{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.1;letter-spacing:-.025em;margin:16px 0 14px;font-weight:700}
+.story p{color:var(--muted);font-size:1.07rem;margin:0 0 18px}
+.stats{display:grid;gap:14px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px 26px;box-shadow:0 10px 34px rgba(16,35,58,.06)}
+.stat b{display:block;font-size:2.6rem;letter-spacing:-.03em;line-height:1;color:var(--navy)}
+.stat span{color:var(--muted);font-size:.97rem}
+.quote{background:var(--navy);color:#fff;border-radius:20px;padding:24px 26px}
+.quote p{color:#fff;margin:0 0 10px;font-size:1.05rem}
+.quote small{color:#bcd0e4}
+
+/* services */
+.services{padding:90px 0 20px;text-align:center}
+.services .sub2{color:var(--muted);max-width:620px;margin:0 auto 38px}
+.feat{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;text-align:left;align-items:stretch}
+.feat-list{display:flex;flex-direction:column}
+.feat-list button{all:unset;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px 14px;border-bottom:1px solid var(--line);font-size:1.02rem;color:var(--muted);border-radius:10px;transition:background .15s,color .15s}
+.feat-list button:hover{color:var(--ink)}
+.feat-list button[aria-selected="true"]{background:var(--soft);color:var(--ink);font-weight:600}
+.feat-list button:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.feat-panel{background:var(--soft);border:1px solid var(--line);border-radius:26px;padding:clamp(22px,4vw,38px);display:flex;flex-direction:column;justify-content:center;min-height:300px}
+.feat-panel h3{font-size:1.6rem;letter-spacing:-.02em;margin:12px 0 10px}
+.feat-panel p{color:var(--muted);font-size:1.05rem;margin:0 0 22px}
+.chip{align-self:flex-start;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;background:#fff;border:1px solid var(--line);color:var(--green);font-weight:700;padding:5px 11px;border-radius:999px}
+.feat-panel .btn{align-self:flex-start}
+.cta-row{margin-top:34px}
+
+/* why */
+.why{padding:96px 0 20px}
+.why h2{margin-top:0}
+.acc{display:grid;gap:12px;margin-top:26px}
+details.item{border:1px solid var(--line);border-radius:var(--radius);background:#fff;padding:0}
+details.item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 26px}
+details.item summary::-webkit-details-marker{display:none}
+.item .t{font-size:1.3rem;font-weight:600;letter-spacing:-.01em}
+.item .t small{display:block;font-size:.97rem;font-weight:400;color:var(--muted);margin-top:2px}
+.pm{flex:none;width:28px;height:28px;position:relative}
+.pm::before,.pm::after{content:"";position:absolute;left:6px;right:6px;top:13px;height:2px;background:var(--muted);transition:transform .2s}
+.pm::after{transform:rotate(90deg)}
+details[open] .pm::after{transform:rotate(0)}
+.item .body{padding:0 26px 26px;color:var(--muted);font-size:1.05rem;max-width:760px}
+details.item summary:focus-visible{outline:2px solid var(--navy);outline-offset:2px;border-radius:var(--radius)}
+
+/* built by */
+.by{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:100px 0 30px}
+.by h2{margin-top:14px;margin-bottom:6px}
+.by .role{font-size:1.25rem;color:var(--muted);margin:0 0 18px}
+.by p{color:var(--muted);font-size:1.07rem;margin:0 0 16px}
+.by p b{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 16px;text-decoration:none;font-size:.95rem;font-weight:500}
+.pill:hover{background:var(--soft)}
+.portrait{position:relative;height:340px;display:grid;place-items:center}
+.circle{width:230px;height:230px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--green));display:grid;place-items:center;color:#fff;font-size:4rem;font-weight:700;letter-spacing:.02em}
+.bubble{position:absolute;background:#fff;border:1px solid var(--line);border-radius:26px;padding:12px 20px;text-align:center;box-shadow:0 12px 36px rgba(16,35,58,.1)}
+.bubble b{display:block;font-size:1.9rem;letter-spacing:-.02em;line-height:1.1;color:var(--navy)}
+.bubble span{font-size:.82rem;color:var(--muted)}
+.b1{left:2%;top:10px}
+.b2{right:0;bottom:12px}
+
+/* faq */
+.faq{padding:96px 0 10px}
+.faq h2{text-align:center;margin-top:0}
+.faq .acc{max-width:820px;margin-inline:auto}
+.faq .item .t{font-size:1.08rem;font-weight:500}
+
+/* closing */
+.close{text-align:center;padding:100px 0 70px}
+.close h2{font-size:clamp(2rem,5vw,3.2rem);margin:0 0 26px}
+.close h2 .light{display:block;color:#5a6b85;font-weight:600}
+.close .btn{padding:16px 54px;font-size:1.05rem}
+
+/* footer */
+footer{padding:10px 0 50px}
+.fbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 28px;max-width:860px;margin:0 auto;border:1px solid var(--line);border-radius:999px;padding:12px 18px;box-shadow:0 8px 30px rgba(16,35,58,.05)}
+.fbar img{height:30px;width:auto}
+.fbar a{text-decoration:none;color:var(--muted);font-size:.93rem}
+.fbar a:hover{color:var(--ink)}
+.fbar a.btn,.fbar a.btn:hover{color:#fff}
+.copy{text-align:center;color:var(--muted);font-size:.9rem;margin:22px 0 0}
+#privacy{max-width:640px;margin:24px auto 0;text-align:center;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);padding-top:20px}
+
+/* phone */
+@media (max-width:860px){
+  .nav ul{display:none}
+  .hero{padding-top:54px}
+  .show-grid{grid-template-columns:1fr}
+  .story,.by,.feat{grid-template-columns:1fr}
+  .story{padding-top:70px;gap:30px}
+  .by{gap:20px}
+  .portrait{height:310px}
+  .signup{flex-direction:row}
+  .btn{padding:12px 18px}
+  .item .t{font-size:1.12rem}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}#rot{transition:none}.btn{transition:none}}
 </style>
 </head>
 <body>
-<main>
-  <h1>in-district.org</h1>
-  <p>Launching soon.</p>
+
+<header class="nav" role="banner">
+  <a href="#top" aria-label="In-District home"><img src="logo.png" alt="In-District"></a>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#built-by">Who's behind it</a></li>
+    <li><a href="#questions">Questions</a></li>
+  </ul>
+  <a class="btn small" href="#start">Get started</a>
+</header>
+
+<main id="top">
+
+<section class="hero wrap" id="start">
+  <h1><span class="light">You run the district.</span><span class="aside">You don't need a middleman.</span><span class="hand">(your own staff can do this)</span></h1>
+  <p class="sub">In-District is a new school board association, being shaped with the superintendents and business officials who would use it.</p>
+
+  <!-- PREVIEW ONLY: this form sends nothing anywhere. The district email check and the text-code step are not built yet. -->
+  <form class="signup" id="gate" novalidate>
+    <input type="email" id="email" name="email" placeholder="you@yourdistrict.org" autocomplete="email" aria-label="Your district email address" required>
+    <button class="btn" type="submit">Get started <span aria-hidden="true">&#8599;</span></button>
+  </form>
+  <div class="msg" id="msg" role="status" aria-live="polite"></div>
+  <p class="fine">Open to California superintendents and chief business officials. We check your district email and confirm by text.</p>
+
+  <p class="for">For <strong id="rot">superintendents running a district</strong></p>
+
+  <div class="showcase" aria-label="What In-District is">
+    <p class="show-title">A new paradigm for school boards and the districts they serve.</p>
+    <div class="show-grid">
+      <div class="mini"><div class="tag">1. Tell us</div><h3>What you would use</h3><p>Tick the services that matter to your district and skip the rest.</p></div>
+      <div class="mini"><div class="tag">2. Advise us</div><h3>What a new association should be</h3><p>A few questions about your district and about what a school board association should do.</p></div>
+      <div class="mini"><div class="tag">3. Help build it</div><h3>Be there from the start</h3><p>Join the group forming the entity, as much or as little as you choose.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap story" aria-labelledby="story-h">
+  <div>
+    <span class="label">We have done this before</span>
+    <h2 id="story-h">One shared report grew to more than 400 California public entities.</h2>
+    <p>Two decades ago my actuarial firm built a GASB 45 compliance report for California school districts. The goal was simple: make the service available at a fair price.</p>
+    <p>The work grew well beyond schools, to cities, counties and colleges. The lesson: when a service is priced fairly and does what it should, it spreads.</p>
+    <a class="btn" href="#start">Get started <span aria-hidden="true">&#8599;</span></a>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>20+</b><span>years since the first GASB 45 report for California school districts</span></div>
+    <div class="stat"><b>400+</b><span>California public sector entities served, including cities, counties and colleges</span></div>
+    <div class="quote"><p>&ldquo;With the tools of today and tomorrow, you and your staff can do a better job than third parties.&rdquo;</p><small>Brian R. Demsey</small></div>
+  </div>
+</section>
+
+<section class="wrap services" id="services" aria-labelledby="svc-h">
+  <h2 id="svc-h">Services under consideration</h2>
+  <p class="sub2">Nothing is for sale yet. These are the services statewide associations offer today. Tell us which ones you would actually use.</p>
+  <div class="feat">
+    <div class="feat-list" role="tablist" aria-label="Services" id="featList"></div>
+    <div class="feat-panel" id="featPanel" role="tabpanel" aria-live="polite">
+      <span class="chip">Under consideration</span>
+      <h3 id="fTitle"></h3>
+      <p id="fText"></p>
+      <a class="btn" href="#start">I'm interested <span aria-hidden="true">&#8599;</span></a>
+    </div>
+  </div>
+  <div class="cta-row"><a class="btn" href="#start">Get started <span aria-hidden="true">&#8599;</span></a></div>
+</section>
+
+<section class="wrap why" aria-labelledby="why-h">
+  <h2 id="why-h">Why this can work</h2>
+  <div class="acc">
+    <details class="item" open>
+      <summary><span class="t">Your staff, better prepared.<small>Not another outside provider.</small></span><span class="pm" aria-hidden="true"></span></summary>
+      <div class="body">Doing the work yourself leaves you with a staff who understand it. The best steak I ever had came off a grill in my back yard, not from a restaurant.</div>
+    </details>
+    <details class="item">
+      <summary><span class="t">Dollars go to your people.<small>Not another convention trip.</small></span><span class="pm" aria-hidden="true"></span></summary>
+      <div class="body">Instead of traveling to a convention site, redirect those dollars to engaging your board members and staff in a 360 degree strategy for the future.</div>
+    </details>
+    <details class="item">
+      <summary><span class="t">Today's tools.<small>Not an association mired in the past.</small></span><span class="pm" aria-hidden="true"></span></summary>
+      <div class="body">AI tools now make it practical for a district team to do work that once needed an outside provider. Policies and legal information from around the world are widely available online.</div>
+    </details>
+    <details class="item">
+      <summary><span class="t">You decide what gets built.<small>Not a product you are sold.</small></span><span class="pm" aria-hidden="true"></span></summary>
+      <div class="body">The services are not set. Your answers shape them, and you are invited to take part in forming the entity.</div>
+    </details>
+  </div>
+</section>
+
+<section class="wrap by" id="built-by" aria-labelledby="by-h">
+  <div>
+    <span class="label">Built by</span>
+    <h2 id="by-h">Brian R. Demsey</h2>
+    <p class="role">Former Trustee, Capistrano Unified School District</p>
+    <p>I served two terms on the board of the Capistrano Unified School District in the 1990s. I prepared for board meetings by doing my own research and talking to parents about their children's progress.</p>
+    <p>Later my actuarial firm served <b>more than 400 California public sector entities</b>. After it joined a national company, I dove into new technology, wrote <b>more than 40,000 lines of code</b> and a book about the experience.</p>
+    <p>What I learned: with today's tools you can do it yourself, and do it better.</p>
+    <a class="pill" href="https://www.linkedin.com/in/brian-demsey-603481/" rel="noopener" target="_blank">LinkedIn <span aria-hidden="true">&#8599;</span></a>
+  </div>
+  <div class="portrait" aria-hidden="true">
+    <div class="circle">BD</div>
+    <div class="bubble b1"><b>2</b><span>terms on the school board</span></div>
+    <div class="bubble b2"><b>40,000+</b><span>lines of code written</span></div>
+  </div>
+</section>
+
+<section class="wrap faq" id="questions" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="acc">
+    <details class="item" open><summary><span class="t">What is In-District?</span><span class="pm" aria-hidden="true"></span></summary><div class="body">A new school board association now being shaped with California superintendents and business officials. In-District is a temporary name, and the services are not yet set.</div></details>
+    <details class="item"><summary><span class="t">Who can use this site?</span><span class="pm" aria-hidden="true"></span></summary><div class="body">California superintendents and chief business officials. The site checks your district email address against the California Department of Education School Directory.</div></details>
+    <details class="item"><summary><span class="t">How do you confirm who I am?</span><span class="pm" aria-hidden="true"></span></summary><div class="body">You enter your district email address and confirm by a code texted to your cell phone.</div></details>
+    <details class="item"><summary><span class="t">Will my name be shared?</span><span class="pm" aria-hidden="true"></span></summary><div class="body">Your name, email address and phone number will not be shared under any circumstances.</div></details>
+    <details class="item"><summary><span class="t">Would this replace my current association?</span><span class="pm" aria-hidden="true"></span></summary><div class="body">That is not decided. One of our questions asks whether a new association should replace your current one or work alongside it.</div></details>
+    <details class="item"><summary><span class="t">What will it cost?</span><span class="pm" aria-hidden="true"></span></summary><div class="body">There is no price yet. How you would prefer to pay is one of the questions we ask.</div></details>
+    <details class="item"><summary><span class="t">Who is behind it?</span><span class="pm" aria-hidden="true"></span></summary><div class="body">Brian R. Demsey, a former Capistrano Unified School District trustee and the founder of an actuarial firm that served more than 400 California public sector entities.</div></details>
+  </div>
+</section>
+
+<section class="wrap close">
+  <h2><span class="light">You run the district.</span>Let's build the rest together.</h2>
+  <a class="btn" href="#start">Get started <span aria-hidden="true">&#8599;</span></a>
+</section>
+
 </main>
+
+<footer class="wrap">
+  <div class="fbar">
+    <img src="logo.png" alt="In-District">
+    <a href="#services">Services</a>
+    <a href="#questions">Questions</a>
+    <a href="#privacy">Privacy</a>
+    <a href="mailto:bdemsey@demsey.com">Contact</a>
+    <a class="btn small" href="#start">Get started</a>
+  </div>
+  <p class="copy">&copy; 2026 In-District &middot; A new school board association, shaped with the people who will use it.</p>
+  <p id="privacy"><strong>Privacy.</strong> Your name, email address and phone number will not be shared under any circumstances. We will use them only to contact you about In-District.</p>
+</footer>
+
+<script>
+(function(){
+  /* services panel */
+  var services=[
+    ["Policy manual and updates","Keep your board policies current with tools your own staff control, instead of a paid subscription."],
+    ["Legal and Education Code answers","Quick answers to legal and Education Code questions, with sources you can check."],
+    ["Board meeting tools","Tools to prepare agendas, board packets and minutes."],
+    ["Training for your board and staff","Training built around your own board members and staff, not a trip to a convention."],
+    ["Governance and strategy","A 360 degree strategy conversation with your board members and staff."],
+    ["A shared voice on legislation","Positions on legislation set by the districts that join."],
+    ["Research and publications","Plain-language briefs on what is changing in education."],
+    ["Group purchasing","Pooled buying power for common supplies and services."]
+  ];
+  var list=document.getElementById('featList'),title=document.getElementById('fTitle'),text=document.getElementById('fText');
+  function pick(i){
+    title.textContent=services[i][0];text.textContent=services[i][1];
+    [].forEach.call(list.children,function(b,j){b.setAttribute('aria-selected',j===i?'true':'false')});
+  }
+  services.forEach(function(s,i){
+    var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');
+    b.innerHTML='<span></span><span aria-hidden="true">&#8250;</span>';b.firstChild.textContent=s[0];
+    b.addEventListener('click',function(){pick(i)});list.appendChild(b);
+  });
+  pick(0);
+
+  /* rotating audience line */
+  var lines=["superintendents running a district","business officials managing the budget","board members who want facts","staff who would rather do it themselves"];
+  var rot=document.getElementById('rot'),n=0;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){
+    setInterval(function(){
+      rot.classList.add('fade');
+      setTimeout(function(){n=(n+1)%lines.length;rot.textContent=lines[n];rot.classList.remove('fade')},350);
+    },3200);
+  }
+
+  /* preview-only sign-up box: sends nothing */
+  var form=document.getElementById('gate'),email=document.getElementById('email'),msg=document.getElementById('msg');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+    msg.classList.add('show');
+    msg.textContent=ok
+      ?"Preview only: nothing was sent or saved. When this page goes live, this step will check your district email and text you a confirmation code."
+      :"Please enter a district email address, such as you@yourdistrict.org.";
+  });
+})();
+</script>
 </body>
 </html>
